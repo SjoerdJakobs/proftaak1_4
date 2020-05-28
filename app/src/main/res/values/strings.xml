@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">proftaak1_4</string>
+    <string name="buttonForList">List</string>
+    <string name="buttonForSpell">spell</string>
 </resources>

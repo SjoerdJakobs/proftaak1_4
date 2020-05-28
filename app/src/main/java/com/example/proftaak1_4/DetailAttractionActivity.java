@@ -6,19 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class DetailAttractionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_detail_attraction);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setFocusable(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
     }
 
@@ -27,28 +25,34 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
                     switchTo(item.getItemId());
                     return true;
                 }
             };
+
 
     private void switchTo(int navigation){
 
         Intent intent = null;
         switch(navigation){
             case R.id.attractions:
-                 intent = new Intent(this, AllAtractionActivity.class);
-                 break;
+                intent = new Intent(this, AllAtractionActivity.class);
+                break;
+
+            case R.id.map:
+                intent = new Intent(this, MainActivity.class);
+                break;
 
             case R.id.spell:
                 intent = new Intent(this, AntiSpellActivity.class);
                 break;
         }
 
+
         if(intent != null)
             startActivity(intent);
     }
+
 
 
 }
