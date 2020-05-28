@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/luminari_font</item>
+        <item name="titleTextColor">@color/blackCol</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColor">@color/blackCol</item>
+        <item name="android:fontFamily">@font/luminari_font</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
 </resources>
