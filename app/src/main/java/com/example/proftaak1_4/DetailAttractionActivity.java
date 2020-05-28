@@ -6,10 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.w3c.dom.Text;
+
+import java.net.Inet4Address;
+
 public class DetailAttractionActivity extends AppCompatActivity {
+
+    public static final String EXTRA_OBJECT = "all/information";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,20 @@ public class DetailAttractionActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        AttrationInformation information = null;
+        if(bundle != null){
+            information = (AttrationInformation) bundle.getSerializable(EXTRA_OBJECT);
+        }
+
+        if(information != null){
+            TextView textView = findViewById(R.id.textView_detail);
+            textView.setText(information.getText());
+        }
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

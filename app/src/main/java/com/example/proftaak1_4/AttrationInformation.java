@@ -2,7 +2,9 @@ package com.example.proftaak1_4;
 
 import android.media.Image;
 
-public class AttrationInformation {
+import java.io.Serializable;
+
+public class AttrationInformation implements Serializable {
 
     private int imageID;
     private String title;
@@ -28,15 +30,19 @@ public class AttrationInformation {
         String text = "";
 
         switch (typeOfAttraction){
-            case "Cobra":
-                text = "";
+            case "cobra":
+                text = "prepare to be astonished! here is the cobra ";
                 break;
 
-            case "FabelWoud":
-                text = "";
+            case "fabelwoud":
+                text = "Here is the fabel woud ladies and gentlemen";
                 break;
         }
 
         return text;
+    }
+
+    public String getCaption(){
+        return title;
     }
 }
