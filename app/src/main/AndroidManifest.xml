@@ -10,12 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DetailAttractionActivity"></activity>
+        <activity android:name=".AttractionInfoActivity"/>
         <activity android:name=".AllAtractionActivity" />
         <activity android:name=".AntiSpellActivity" />
         <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".AttractionInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

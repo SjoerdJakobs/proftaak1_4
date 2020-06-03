@@ -74,7 +74,7 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
     @Override
     public void onItemClick(int position) {
 
-        Intent intent = new Intent(this, DetailAttractionActivity.class);
+        Intent intent = new Intent(this, AttractionInfoActivity.class);
         AttrationInformation information = this.allAttractions.get(position);
 
         Bundle bundle = new Bundle();
