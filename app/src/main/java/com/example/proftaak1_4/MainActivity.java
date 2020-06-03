@@ -26,22 +26,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setFocusable(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-        //ImageButton information_button = findViewById(R.id.imageButton);
-        //Button X_close = findViewById(R.id.button);
-        /*
-        information_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Popup.class));
-            }
-        });
-*/
-        //X_close.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View v) {
-                //startActivity(new Intent());
-            //}
-        //});
     }
 
     public void ShowPopUp(View v){
