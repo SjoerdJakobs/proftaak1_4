@@ -21,7 +21,7 @@ public class DetailAttractionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_attraction);
+        setContentView(R.layout.attractie_info);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
@@ -35,7 +35,7 @@ public class DetailAttractionActivity extends AppCompatActivity {
         }
 
         if(information != null){
-            TextView textView = findViewById(R.id.textView_detail);
+            TextView textView = findViewById(R.id.attraction_description);
             textView.setText(information.getText());
         }
 
