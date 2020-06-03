@@ -2,4 +2,13 @@
     <string name="app_name">proftaak1_4</string>
     <string name="buttonForList">List</string>
     <string name="buttonForSpell">spell</string>
+
+
+
+    //anti spreuk stuff
+    <string name="buttonForInvoeren">Invoeren</string>
+    <string name="buttonForSpelregels">Spelregels</string>
+    <string name="textSpellPart1">_ _ _ _ _</string>
+    <string name="textSpellPart2">_ _ _ _ _</string>
+    <string name="invoegText">Voeg hier uw code in...</string>
 </resources>
