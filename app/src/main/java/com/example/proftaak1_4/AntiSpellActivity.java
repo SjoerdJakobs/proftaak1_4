@@ -37,7 +37,6 @@ public class AntiSpellActivity extends AppCompatActivity {
     MqttAndroidClient client;
     SavedData data = SavedData.INSTANCE;
 
-    private TextInputEditText test;
 
 
     @Override
@@ -47,12 +46,6 @@ public class AntiSpellActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-
-        this.test = (TextInputEditText) findViewById(R.id.inputAntiSpellCode);
-        client = null;
-
-        ConnectToChannel();
-//        SubscribeToCobra();
 
         final EditText edittext = (EditText) findViewById(R.id.inputAntiSpellCode);
         edittext.setOnKeyListener(new View.OnKeyListener() {
@@ -73,11 +66,6 @@ public class AntiSpellActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 System.out.println("in ge-yeet");
-                if(test != null && !test.getText().toString().isEmpty()){
-                    int input = Integer.parseInt(test.getText().toString());
-                    System.out.println(input);
-                    System.out.println("there are no rules");
-                }
 
             }
         });
@@ -120,92 +108,7 @@ public class AntiSpellActivity extends AppCompatActivity {
         if(intent != null)
             startActivity(intent);
     }
-
-
-    /**
-     * this is everything for the MQTT
-     */
-
-    private void ConnectToChannel() {
-
-        String clientID = MqttClient.generateClientId();
-
-        client = new MqttAndroidClient(this.getApplicationContext(), "maxwell.bps-software.nl:1883", clientID);
-
-        try {
-
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setUserName("androidTI");
-            options.setPassword("&FN+g$$Qhm7j".toCharArray());
-            options.setAutomaticReconnect(true);
-            options.setCleanSession(false);
-
-            IMqttToken token = client.connect(options);
-
-            token.setActionCallback(new IMqttActionListener() {
-
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.d(TAG, "onSuccess: CONNECTED!!!");
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.d(TAG, "onFailure: COULD NOT CONNECT!!, exception: " + exception.getMessage());
-                }
-            });
-
-
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void SubscribeToCobra(){
-        final String top = "Student/A5/Games/CobraSpel";
-        int qos = 2;
-
-        try{
-                IMqttToken subToken = client.subscribe(top, qos);
-                subToken.setActionCallback(new IMqttActionListener() {
-                    @Override
-                    public void onSuccess(IMqttToken asyncActionToken) {
-                        Log.d(TAG, "onSuccess: CONNECTED TO THE COBRA GAME!!!");
-                    }
-
-                    @Override
-                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                        Log.d(TAG, "onFailure: COULD NOT CONNECT TO THE COBRA!, exception:  " + exception.getMessage());
-                    }
-                });
-
-
-            client.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable cause) {
-                    Log.d(TAG, "connectionLost: DISCONNECTED!");
-                }
-
-                @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    Log.d(TAG, "messageArrived: MESSAGE ARRIVED!!!");
-                    data.getSessionData().getTopicMsg().put(topic, message.toString());
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {
-                    Log.d(TAG, "deliveryComplete: MESSAGE ARRIVED!!!");
-                }
-            });
-
-
-        } catch (MqttSecurityException e) {
-            e.printStackTrace();
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
+    
 
 
 }
