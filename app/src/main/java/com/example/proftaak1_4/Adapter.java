@@ -26,12 +26,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
     class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView textView;
-//        public ImageView imageView;
+        public ImageView imageView;
 
         public Holder(@NonNull View itemView, Adapter adapter) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.cardview_textView);
-//            imageView = (ImageView) itemView.findViewById(R.id.cardview_imageView);
+            imageView = (ImageView) itemView.findViewById(R.id.cardview_imageview);
 
             itemView.setOnClickListener(this);
         }
@@ -63,7 +63,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
         AttrationInformation information = this.allAtractions.get(position);
 
         holder.textView.setText(information.getCaption());
-//        holder.imageView.setImageResource(R.drawable);
+
+        switch (information.getTypeOfAttraction()){
+            case "cobra":
+                holder.imageView.setImageResource(R.drawable.cobra);
+                break;
+            case "fabelwoud":
+                holder.imageView.setImageResource(R.drawable.the_tree);
+                break;
+        }
+
     }
 
     @Override
