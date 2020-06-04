@@ -5,6 +5,7 @@ import com.example.proftaak1_4.AttrationInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SessionData implements Serializable
 {
@@ -23,6 +24,8 @@ public class SessionData implements Serializable
     private ArrayList<AttrationInformation> allAttractions;
     private boolean firstStart;
 
+    private HashMap<String, String> topicMsg;
+
 
     SessionData()
     {
@@ -38,6 +41,7 @@ public class SessionData implements Serializable
 
         allAttractions = new ArrayList<>();
         this.firstStart = true;
+        this.topicMsg = new HashMap<>();
     }
 
     public String getCode1() {
@@ -126,5 +130,13 @@ public class SessionData implements Serializable
 
     public void setFirstStart(boolean firstStart) {
         this.firstStart = firstStart;
+    }
+
+    public HashMap<String, String> getTopicMsg() {
+        return topicMsg;
+    }
+
+    public void setTopicMsg(HashMap<String, String> topicMsg) {
+        this.topicMsg = topicMsg;
     }
 }

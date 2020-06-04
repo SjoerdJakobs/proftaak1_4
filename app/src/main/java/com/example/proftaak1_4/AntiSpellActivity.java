@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.proftaak1_4.ReadWriteData.SavedData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -32,6 +33,7 @@ public class AntiSpellActivity extends AppCompatActivity {
     final static String TAG = "AntiSpellActivity";
 
     MqttAndroidClient client;
+    SavedData data = SavedData.INSTANCE;
 
 
     @Override
@@ -146,7 +148,7 @@ public class AntiSpellActivity extends AppCompatActivity {
 
 
     public void SubscribeToCobra(){
-        String top = "Student/A5/Games/CobraSpel";
+        final String top = "Student/A5/Games/CobraSpel";
         int qos = 2;
 
         try{
@@ -171,7 +173,8 @@ public class AntiSpellActivity extends AppCompatActivity {
 
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
-
+                    Log.d(TAG, "messageArrived: MESSAGE ARRIVED!!!");
+//                    data.getSessionData().getTopicMsg().put(topic, )
                 }
 
                 @Override
