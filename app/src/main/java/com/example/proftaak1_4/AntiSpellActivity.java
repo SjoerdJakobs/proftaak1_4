@@ -23,7 +23,10 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttToken;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
+
+import java.util.HashMap;
 
 
 public class AntiSpellActivity extends AppCompatActivity {
@@ -40,9 +43,19 @@ public class AntiSpellActivity extends AppCompatActivity {
 
     private MqttAndroidClient client;
 
+    private final int qos = 0;
+
+    private final String topic = "Student/A5/Games/#";
+
+    HashMap<String, String> topicMsg = new HashMap<>();
+
+    private IMqttToken token;
+
     @Override
     protected void onDestroy() {
         disconnectFromBroker(client);
+        client.unregisterResources();
+        client.close();
         super.onDestroy();
     }
 
@@ -73,7 +86,7 @@ public class AntiSpellActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d(LOGTAG, "MQTT client received message " + message + " on topic " + topic);
                 // Check what topic the message is for and handle accordingly
-
+                topicMsg.put(topic, message.toString());
             }
 
             @Override
@@ -84,73 +97,58 @@ public class AntiSpellActivity extends AppCompatActivity {
 
         connectToBroker(client, clientId);
 
+//        if ( client.isConnected() ){
+//            subscribeTopic();
+//        }
 
+        invoerButton.setOnClickListener(new View.OnClickListener() {
 
-//        invoerButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                final String topic = "Student/A5/Games/#";
-//                final int qos = 0;
-//
-//                try {
-//                    IMqttToken subToken = client.subscribe(topic, qos);
-//                    subToken.setActionCallback(new IMqttActionListener() {
-//                        @Override
-//                        public void onSuccess(IMqttToken asyncActionToken) {
-//                            // The message was published
-//                            System.out.println("SUBSCRIBED TO TOPIC");
-//                        }
-//
-//                        @Override
-//                        public void onFailure(IMqttToken asyncActionToken,
-//                                              Throwable exception) {
-//                            // The subscription could not be performed, maybe the user was not
-//                            // authorized to subscribe on the specified topic e.g. using wildcards
-//                            System.out.println("COULDNT SUBSCRIBE TO TOPIC");
-//                        }
-//                    });
-//
-//
-//                } catch (MqttException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                client.setCallback(new MqttCallback() {
-//                    @Override
-//                    public void connectionLost(Throwable cause) {
-//
-//                    }
-//
-//                    @Override
-//                    public void messageArrived(String topic, MqttMessage message) throws Exception {
-//                        if ( message.toString().equals(codeInput.getEditText())){
-//                            textView.setText("HOCUS");
-//                        }
-//                        System.out.println("FETCHED MESSAGE IN TOPIC");
-//                    }
-//
-//                    @Override
-//                    public void deliveryComplete(IMqttDeliveryToken token) {
-//
-//                    }
-//                });
-//            }
-//        });
+            @Override
+            public void onClick(View v) {
+                if (topicMsg.containsValue(codeInput.toString())){
+                    textView.setText("HOCUS");
+                } else {
+                    textView.setText("FAILED");
+                }
+            }
+        });
+    }
+
+    private void subscribeTopic(){
+        String top = "Student/A5/Games/CobraSpel";
+        int qosqos = 1;
+        try {
+            // Try to subscribe to the topic
+            this.token = client.subscribe(this.topic, qosqos);
+            // Set up callbacks to handle the result
+            this.token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log.d(LOGTAG, "MQTT client is now subscribed to topic " + topic);
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    Log.e(LOGTAG, "MQTT failed to subscribe to topic " + topic + " because: " + exception.getLocalizedMessage());
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
 
     private void connectToBroker(MqttAndroidClient client, String clientId){
         MqttConnectOptions options = new MqttConnectOptions();
 
+        options.setConnectionTimeout(240000);
         options.setUserName("androidTI");
         options.setPassword("&FN+g$$Qhm7j".toCharArray());
         options.setAutomaticReconnect(true);
         options.setCleanSession(false);
 
         try {
-            IMqttToken token = client.connect(options);
-            token.setActionCallback(new IMqttActionListener() {
+            this.token = client.connect(options);
+            this.token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // We are connected
@@ -187,6 +185,27 @@ public class AntiSpellActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.e(LOGTAG, "MQTT failed to disconnect from MQTT broker: " + exception.getLocalizedMessage());
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void subscribeToTopic(MqttAndroidClient client, final String topic) {
+        try {
+            // Try to subscribe to the topic
+            IMqttToken token = client.subscribe(topic, qos);
+            // Set up callbacks to handle the result
+            token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log.d(LOGTAG, "MQTT client is now subscribed to topic " + topic);
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    Log.e(LOGTAG, "MQTT failed to subscribe to topic " + topic + " because: " + exception.getLocalizedMessage());
                 }
             });
         } catch (MqttException e) {
