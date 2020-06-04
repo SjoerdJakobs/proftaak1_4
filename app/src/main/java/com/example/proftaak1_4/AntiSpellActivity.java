@@ -17,10 +17,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 
 
 public class AntiSpellActivity extends AppCompatActivity {
@@ -130,7 +134,7 @@ public class AntiSpellActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.d(TAG, "onFailure: COULD NOT CONNECT!!" + exception.getMessage());
+                    Log.d(TAG, "onFailure: COULD NOT CONNECT!!, exception: " + exception.getMessage());
                 }
             });
 
@@ -138,8 +142,50 @@ public class AntiSpellActivity extends AppCompatActivity {
         } catch (MqttException e) {
             e.printStackTrace();
         }
+    }
 
 
+    public void SubscribeToCobra(){
+        String top = "Student/A5/Games/CobraSpel";
+        int qos = 2;
+
+        try{
+            IMqttToken subToken = client.subscribe(top, qos);
+            subToken.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log.d(TAG, "onSuccess: CONNECTED TO THE COBRA GAME!!!");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    Log.d(TAG, "onFailure: COULD NOT CONNECT TO THE COBRA!, exception:  " + exception.getMessage());
+                }
+            });
+
+            client.setCallback(new MqttCallback() {
+                @Override
+                public void connectionLost(Throwable cause) {
+                    Log.d(TAG, "connectionLost: DISCONNECTED!");
+                }
+
+                @Override
+                public void messageArrived(String topic, MqttMessage message) throws Exception {
+
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken token) {
+                    Log.d(TAG, "deliveryComplete: MESSAGE ARRIVED!!!");
+                }
+            });
+
+
+        } catch (MqttSecurityException e) {
+            e.printStackTrace();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
 
 
