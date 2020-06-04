@@ -108,6 +108,7 @@ public class AntiSpellActivity extends AppCompatActivity {
                 for(String value : topicMsg.values()){
                     if(value.equals(codeInput.getText().toString())){
                         textView.setText("HOCUS");
+                        System.out.println(topicMsg.keySet());
                         return;
                     }
                 }
@@ -123,7 +124,7 @@ public class AntiSpellActivity extends AppCompatActivity {
     }
 
     private void subscribeTopic() {
-        String top = "Student/A5/Games/CobraSpel";
+        String top = "Student/A5/Games/#";
         int qosqos = 0;
         try {
             // Try to subscribe to the topic
