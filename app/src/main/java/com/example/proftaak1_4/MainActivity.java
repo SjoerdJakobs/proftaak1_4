@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         mydialog = new Dialog(this);
 
-        saveAndLoad();
+//        saveAndLoad();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setFocusable(false);
@@ -51,26 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mydialog.show();
     }
 
-    private void saveAndLoad()
-    {
-        Context context = getApplicationContext();
-        SavedData savedData = SavedData.INSTANCE;
-        savedData.Setup(context);
-        savedData.Load();
 
-        /* test code
-        System.out.println(savedData.getSessionData().getUserName());
-
-        if(savedData.getSessionData().getUserName().equals("yeee4"))
-        {
-            System.out.println("succes");
-        }
-        else
-        {
-            savedData.getSessionData().setUserName("yeee4");
-            savedData.Save();
-        }*/
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

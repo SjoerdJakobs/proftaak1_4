@@ -43,6 +43,7 @@ import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 import org.eclipse.paho.client.mqttv3.MqttToken;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 
 
@@ -53,7 +54,7 @@ public class AntiSpellActivity extends AppCompatActivity {
     final static String TAG = "AntiSpellActivity";
 
     MqttAndroidClient client;
-    SavedData data = SavedData.INSTANCE;
+    private SavedData data = SavedData.INSTANCE;
 
 
 
@@ -72,7 +73,6 @@ public class AntiSpellActivity extends AppCompatActivity {
 
     private final String topic = "Student/A5/Games/CobraSpel";
 
-    HashMap<String, String> topicMsg = new HashMap<>();
 
     private IMqttToken token;
 
@@ -107,14 +107,14 @@ public class AntiSpellActivity extends AppCompatActivity {
             }
         });
 
-        final Button invoerButton = findViewById(R.id.invoerenButtonAntispreuk);
-        invoerButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                System.out.println("in ge-yeet");
-
-            }
-        });
+//        final Button invoerButton = findViewById(R.id.invoerenButtonAntispreuk);
+//        invoerButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                // Code here executes on main thread after user presses button
+//                System.out.println("in ge-yeet");
+//
+//            }
+//        });
 
         final Button regelsButton = findViewById(R.id.spelregelsButtonAntispreuk);
         regelsButton.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +128,8 @@ public class AntiSpellActivity extends AppCompatActivity {
 
 
 
-        invoerButton = findViewById(R.id.button3);
-        codeInput = findViewById(R.id.invoeg_anti_spell);
+        invoerButton = findViewById(R.id.invoerenButtonAntispreuk);
+        codeInput = findViewById(R.id.inputAntiSpellCode);
         textView = findViewById(R.id.textView3);
 
         final String clientId = MqttClient.generateClientId();
@@ -147,7 +147,7 @@ public class AntiSpellActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d(LOGTAG, "MQTT client received message " + message + " on topic " + topic);
                 // Check what topic the message is for and handle accordingly
-                topicMsg.put(topic, message.toString());
+                data.getSessionData().getTopicMsg().put(topic, message.toString());
             }
 
             @Override
@@ -165,10 +165,19 @@ public class AntiSpellActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println(codeInput.getText().toString());
 
-                for(String value : topicMsg.values()){
-                    if(value.equals(codeInput.getText().toString())){
+                for(String key : data.getSessionData().getTopicMsg().keySet()){
+                    if(data.getSessionData().getTopicMsg().get(key).equals(codeInput.getText().toString())){
                         textView.setText("HOCUS");
-                        System.out.println(topicMsg.keySet());
+                        System.out.println(data.getSessionData().getTopicMsg().keySet());
+                        if(key.contains("CobraSpel")){
+                                for(AttrationInformation i : data.getSessionData().getAllAttractions() ){
+                                    if(i.getTitle().equals("Cobra")){
+                                        System.out.println("IK GA HET CHECKEN");
+                                        i.setUnlocked(true);
+                                    }
+                                }
+
+                        }
                         return;
                     }
                 }

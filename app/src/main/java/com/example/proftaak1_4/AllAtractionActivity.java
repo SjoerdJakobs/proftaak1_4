@@ -102,7 +102,6 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-            data.getSessionData().getAllAttractions().get(0).setUnlocked(false);
         }
 
     }
