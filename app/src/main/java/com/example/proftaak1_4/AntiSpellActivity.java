@@ -174,7 +174,7 @@ public class AntiSpellActivity extends AppCompatActivity {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     Log.d(TAG, "messageArrived: MESSAGE ARRIVED!!!");
-//                    data.getSessionData().getTopicMsg().put(topic, )
+                    data.getSessionData().getTopicMsg().put(topic, message.toString());
                 }
 
                 @Override
