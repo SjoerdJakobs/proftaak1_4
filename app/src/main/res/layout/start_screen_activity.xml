@@ -12,7 +12,7 @@
         android:layout_width="146dp"
         android:layout_height="34dp"
         android:background="@drawable/button_corners"
-        android:text="Help nu het park!"
+        android:text="Help het park!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -47,32 +47,32 @@
         app:srcCompat="@drawable/border" />
 
     <ScrollView
-        android:layout_width="242dp"
-        android:layout_height="455dp"
+        android:layout_width="256dp"
+        android:layout_height="300dp"
         android:fadeScrollbars="false"
         android:scrollbarThumbVertical="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594">
+        app:layout_constraintVertical_bias="0.497">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="20dp"
                 android:text="Welkom bij de Essteling!\nDe boze tovenaar heeft een spreuk over het park uitgesproken en heeft de attracties onder zijn macht. Heb jij het in je en wil jij ons helpen het park te bevrijden van de spreuk?"
-                android:textColor="#FFFFFF"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -84,9 +84,9 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="10dp"
                 android:text="Stap 1:"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -95,11 +95,11 @@
                 android:layout_below="@+id/textView10"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="20dp"
                 android:text="Kijk op de plattegrond of er nog opdrachten voltooid moeten worden. Zo ja, loop er naartoe en voltooi de opdracht."
-                android:textColor="#FFFFFF"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -108,12 +108,12 @@
                 android:layout_below="@+id/textView11"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
                 android:text="Stap 2:"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -122,11 +122,11 @@
                 android:layout_below="@+id/textView12"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="20dp"
                 android:text="Wanneer je een opdracht voltooid hebt ontvang je een code, vul deze in de app in."
-                android:textColor="#FFFFFF"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -135,12 +135,12 @@
                 android:layout_below="@+id/textView13"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
                 android:text="Stap 3:"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -149,11 +149,11 @@
                 android:layout_below="@+id/textView14"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="20dp"
                 android:text="Heb je alle codes goed ingevuld en elke opdracht voltooid, dan heb je de volledige spreuk gevonden en het park bevrijd."
-                android:textColor="#FFFFFF"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
 
         </RelativeLayout>
     </ScrollView>
