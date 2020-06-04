@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -32,7 +33,7 @@ import java.util.HashMap;
 public class AntiSpellActivity extends AppCompatActivity {
 
     private Button invoerButton;
-    private TextInputLayout codeInput;
+    private TextInputEditText codeInput;
 
     private TextView textView;
 
@@ -45,7 +46,7 @@ public class AntiSpellActivity extends AppCompatActivity {
 
     private final int qos = 0;
 
-    private final String topic = "Student/A5/Games/#";
+    private final String topic = "Student/A5/Games/CobraSpel";
 
     HashMap<String, String> topicMsg = new HashMap<>();
 
@@ -68,18 +69,18 @@ public class AntiSpellActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         invoerButton = findViewById(R.id.button3);
-        codeInput = findViewById(R.id.textInputLayout2);
+        codeInput = findViewById(R.id.invoeg_anti_spell);
         textView = findViewById(R.id.textView3);
 
         final String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient( getApplicationContext(), "tcp://maxwell.bps-software.nl:1883", clientId);
-
+        client = new MqttAndroidClient(getApplicationContext(), "tcp://maxwell.bps-software.nl:1883", clientId);
 
 
         client.setCallback(new MqttCallback() {
             @Override
             public void connectionLost(Throwable cause) {
                 Log.d(LOGTAG, "MQTT client lost connection to broker");
+
             }
 
             @Override
@@ -97,34 +98,42 @@ public class AntiSpellActivity extends AppCompatActivity {
 
         connectToBroker(client, clientId);
 
-//        if ( client.isConnected() ){
-//            subscribeTopic();
-//        }
 
         invoerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (topicMsg.containsValue(codeInput.toString())){
-                    textView.setText("HOCUS");
-                } else {
-                    textView.setText("FAILED");
+                System.out.println(codeInput.getText().toString());
+
+                for(String value : topicMsg.values()){
+                    if(value.equals(codeInput.getText().toString())){
+                        textView.setText("HOCUS");
+                        return;
+                    }
                 }
+
+                textView.setText("FAILED");
+//                if (topicMsg.containsValue(codeInput.getText().toString())) {
+//                    textView.setText("HOCUS");
+//                } else {
+//                    textView.setText("FAILED");
+//                }
             }
         });
     }
 
-    private void subscribeTopic(){
+    private void subscribeTopic() {
         String top = "Student/A5/Games/CobraSpel";
-        int qosqos = 1;
+        int qosqos = 0;
         try {
             // Try to subscribe to the topic
-            this.token = client.subscribe(this.topic, qosqos);
+            this.token = client.subscribe(top, qosqos);
             // Set up callbacks to handle the result
             this.token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.d(LOGTAG, "MQTT client is now subscribed to topic " + topic);
+
                 }
 
                 @Override
@@ -137,7 +146,7 @@ public class AntiSpellActivity extends AppCompatActivity {
         }
     }
 
-    private void connectToBroker(MqttAndroidClient client, String clientId){
+    private void connectToBroker(MqttAndroidClient client, String clientId) {
         MqttConnectOptions options = new MqttConnectOptions();
 
         options.setConnectionTimeout(240000);
@@ -155,6 +164,7 @@ public class AntiSpellActivity extends AppCompatActivity {
                     //Log.d(TAG, "onSuccess");
                     Log.d(LOGTAG, "Connected");
                     System.out.println("CONNECTED TO BROKER");
+                    subscribeTopic();
                 }
 
                 @Override
@@ -224,10 +234,10 @@ public class AntiSpellActivity extends AppCompatActivity {
             };
 
 
-    private void switchTo(int navigation){
+    private void switchTo(int navigation) {
 
         Intent intent = null;
-        switch(navigation){
+        switch (navigation) {
             case R.id.attractions:
                 intent = new Intent(this, AllAtractionActivity.class);
                 break;
@@ -237,7 +247,7 @@ public class AntiSpellActivity extends AppCompatActivity {
                 break;
         }
 
-        if(intent != null)
+        if (intent != null)
             startActivity(intent);
     }
 }
