@@ -45,4 +45,8 @@ public class AttrationInformation implements Serializable {
     public String getCaption(){
         return title;
     }
+
+    public String getTypeOfAttraction() {
+        return typeOfAttraction;
+    }
 }
