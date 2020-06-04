@@ -1,25 +1,21 @@
 package com.example.proftaak1_4;
 
-import android.media.Image;
 
 import java.io.Serializable;
 
 public class AttrationInformation implements Serializable {
 
-    private int imageID;
+
     private String title;
     private String typeOfAttraction;
+    private boolean unlocked;
 
-//hiet alleen nog even de foto meegeven, int imageID,
     public AttrationInformation(String title, String typeOfAttraction) {
-//        this.imageID = imageID;
         this.title = title;
         this.typeOfAttraction = typeOfAttraction;
+        this.unlocked = false;
     }
 
-//    public int getImageID() {
-//        return imageID;
-//    }
 
     public String getTitle() {
         return title;
@@ -48,5 +44,13 @@ public class AttrationInformation implements Serializable {
 
     public String getTypeOfAttraction() {
         return typeOfAttraction;
+    }
+
+    public boolean isUnlocked() {
+        return unlocked;
+    }
+
+    public void setUnlocked(boolean unlocked) {
+        this.unlocked = unlocked;
     }
 }

@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.proftaak1_4.ReadWriteData.SavedData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class AllAtractionActivity extends AppCompatActivity implements onItemClickListener {
@@ -18,6 +22,8 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
     private RecyclerView recyclerView;
     private Adapter adapter;
     private ArrayList<AttrationInformation> allAttractions;
+
+    SavedData data = SavedData.INSTANCE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +33,18 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
         allAttractions = new ArrayList<>();
 
         recyclerView = findViewById(R.id.recyclerView);
-        adapter = new Adapter(this, allAttractions, this);
+        adapter = new Adapter(this, data.getSessionData().getAllAttractions(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        allAttractions.add(new AttrationInformation("Cobra", "cobra"));
-        allAttractions.add(new AttrationInformation("Fabel Woud", "fabelwoud"));
-        adapter.notifyDataSetChanged();
+        if(data.getSessionData().isFirstStart()){
+            data.getSessionData().getAllAttractions().add(new AttrationInformation("Cobra", "cobra"));
+            data.getSessionData().getAllAttractions().add(new AttrationInformation("Fabel Woud", "fabelwoud"));
+            adapter.notifyDataSetChanged();
+            data.getSessionData().setFirstStart(false);
+            System.out.println("HELLO LOADING ");
+        }
+
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
@@ -75,12 +86,24 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
     public void onItemClick(int position) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = this.allAttractions.get(position);
+        AttrationInformation information = data.getSessionData().getAllAttractions().get(position);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(DetailAttractionActivity.EXTRA_OBJECT, information);
+        if(information.isUnlocked()){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(DetailAttractionActivity.EXTRA_OBJECT, information);
 
-        intent.putExtras(bundle);
-        startActivity(intent);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence text = "Je hebt deze attractie nog niet vrijgespeeld/bevrijd!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            data.getSessionData().getAllAttractions().get(0).setUnlocked(false);
+        }
+
     }
 }
