@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:id="@+id/attraction_cover_image"
+            android:contentDescription="Attraction cover image."/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/attraction_image_fade"/>
+
+        <Button
+            android:id="@+id/attraction_infopage_backbutton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/backbutton"
+            android:text="x"
+            android:textSize="22sp"
+            android:fontFamily="@font/luminari_font"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:background="#FFF">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-40dp"
+            android:id="@+id/attraction_information"
+            android:fontFamily="@font/luminari_font"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:text="Type: Achtbaan \n Capaciteit: xxx\n Bouwjaar: xxxx"
+            android:paddingStart="40dp"
+            android:paddingEnd="0dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-170dp"
+            android:id="@+id/page_separator_image"
+            android:contentDescription="Page separator image."
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:layout_marginTop="-210dp"
+            android:id="@+id/attraction_description"
+            android:textAlignment="center"
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+            android:fontFamily="@font/luminari_font"
+            android:textSize="16sp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium, nibh ut pulvinar scelerisque, sapien diam molestie elit, a sagittis libero diam ut mi. Etiam posuere sapien velit, sed imperdiet nisl tempor eget. Cras id felis augue. Nam vulputate diam id massa dignissim placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
