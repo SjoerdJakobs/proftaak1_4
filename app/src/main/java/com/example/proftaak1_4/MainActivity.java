@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +42,24 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setFocusable(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
+        ImageButton button1 = findViewById(R.id.imageButton2);
+        ImageButton button2 = findViewById(R.id.imageButton5);
+
+        AttrationInformation information1 = data.getSessionData().getAllAttractions().get(1);
+        AttrationInformation information2 = data.getSessionData().getAllAttractions().get(0);
+
+        if(information1.isUnlocked()) {
+            button1.setColorFilter(Color.parseColor("#38FF00")); //GREEN
+        } else{
+            button1.setColorFilter(Color.parseColor("#68E1D7")); //BLUE
+        }
+
+        if(information2.isUnlocked()) {
+            button2.setColorFilter(Color.parseColor("#38FF00"));
+        }else{
+            button2.setColorFilter(Color.parseColor("#68E1D7"));
+        }
     }
 
 
