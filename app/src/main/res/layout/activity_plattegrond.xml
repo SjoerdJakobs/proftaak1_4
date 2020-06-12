@@ -8,14 +8,17 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="144dp"
+        android:layout_height="97dp"
         android:background="?android:attr/windowBackground"
         android:focusedByDefault="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        app:itemIconSize="50dp"
+        app:itemIconTint="@color/selector"
+        />
 
     <ImageView
         android:id="@+id/imageView"

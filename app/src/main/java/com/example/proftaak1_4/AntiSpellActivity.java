@@ -93,6 +93,9 @@ public class AntiSpellActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.spell);
+        item.setChecked(true);
+
         final EditText edittext = (EditText) findViewById(R.id.inputAntiSpellCode);
         edittext.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {

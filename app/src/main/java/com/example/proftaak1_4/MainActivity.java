@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.Dialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -20,7 +25,10 @@ import android.view.MenuItem;
 
 
 import com.example.proftaak1_4.ReadWriteData.SavedData;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.nio.channels.ScatteringByteChannel;
 
 public class MainActivity extends AppCompatActivity {
     Dialog mydialog;
@@ -36,8 +44,22 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setFocusable(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
+
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.map);
+        item.setChecked(true);
     }
 
+    public void setLayoutForIcon(BottomNavigationMenuView menuView, int i, int id){
+        final View iconView = menuView.getChildAt(i).findViewById(id);
+        final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        // set your height here
+        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, displayMetrics);
+        // set your width here
+        layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, displayMetrics);
+        iconView.setLayoutParams(layoutParams);
+    }
 
     public void ShowPopUp(View v) {
         mydialog.setContentView(R.layout.popup);

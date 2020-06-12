@@ -51,6 +51,9 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
         bottomNavigationView.setFocusable(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.attractions);
+        item.setChecked(true);
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
