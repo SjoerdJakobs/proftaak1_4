@@ -179,8 +179,10 @@ public class AntiSpellActivity extends AppCompatActivity {
                                         i.setUnlocked(true);
                                     }
                                 }
-
                         }
+                        /**
+                         * TODO: do the check for the memory game!
+                         */
                         return;
                     }
                 }

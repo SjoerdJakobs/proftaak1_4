@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             button2.setColorFilter(Color.parseColor("#68E1D7"));
         }
     }
-    
+
 
     public void ShowPopUp(View v) {
         mydialog.setContentView(R.layout.popup);
