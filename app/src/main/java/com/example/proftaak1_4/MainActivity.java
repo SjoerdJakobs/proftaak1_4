@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.example.proftaak1_4.ReadWriteData.SavedData;
@@ -24,6 +25,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     Dialog mydialog;
+
+    SavedData data = SavedData.INSTANCE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,4 +86,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+        public void toDetailScreen(View v) {
+
+        Intent intent = new Intent(this, AttractionInfoActivity.class);
+        AttrationInformation information = data.getSessionData().getAllAttractions().get(0);
+
+        if(information.isUnlocked()){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(DetailAttractionActivity.EXTRA_OBJECT, information);
+
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence text = "Je hebt deze attractie nog niet vrijgespeeld/bevrijd!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+    }
+
+    public void toDetailScreen2(View v) {
+
+        Intent intent = new Intent(this, AttractionInfoActivity.class);
+        AttrationInformation information = data.getSessionData().getAllAttractions().get(1);
+
+        if(information.isUnlocked()){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(DetailAttractionActivity.EXTRA_OBJECT, information);
+
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence text = "Je hebt deze attractie nog niet vrijgespeeld/bevrijd!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+    }
 }

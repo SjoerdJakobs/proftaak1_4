@@ -33,7 +33,9 @@
             android:background="@drawable/backbutton"
             android:text="x"
             android:textSize="22sp"
-            android:fontFamily="@font/luminari_font"/>
+            android:fontFamily="@font/luminari_font"
+            android:onClick="switchToAllAtractions"
+            />
 
     </RelativeLayout>
 

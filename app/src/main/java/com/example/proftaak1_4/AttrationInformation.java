@@ -13,7 +13,7 @@ public class AttrationInformation implements Serializable {
     public AttrationInformation(String title, String typeOfAttraction) {
         this.title = title;
         this.typeOfAttraction = typeOfAttraction;
-        this.unlocked = false;
+        this.unlocked = true;
     }
 
 
