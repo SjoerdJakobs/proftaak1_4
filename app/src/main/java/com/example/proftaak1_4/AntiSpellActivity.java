@@ -120,10 +120,12 @@ public class AntiSpellActivity extends AppCompatActivity {
 //        });
 
         final Button regelsButton = findViewById(R.id.spelregelsButtonAntispreuk);
+        final Intent intent = new Intent(this,StartActivity.class);
         regelsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-
+                if(intent != null)
+                    startActivity(intent);
             }
         });
 
