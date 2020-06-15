@@ -3,6 +3,7 @@ package com.example.proftaak1_4;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.proftaak1_4.ReadWriteData.SavedData;
@@ -83,7 +85,7 @@ public class AntiSpellActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    System.out.println("yeet");
+
                     return true;
                 }
                 return false;
@@ -183,8 +185,13 @@ public class AntiSpellActivity extends AppCompatActivity {
                     }
                 }
 
-                textViewFirstWord.setText("FAILED");
                 codeInput.setText("");
+                Context context = getApplicationContext();
+                CharSequence text = "Oops, er is iets mis gegaan...";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 //                if (topicMsg.containsValue(codeInput.getText().toString())) {
 //                    textView.setText("HOCUS");
 //                } else {
