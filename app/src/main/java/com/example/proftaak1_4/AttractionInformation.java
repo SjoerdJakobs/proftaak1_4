@@ -20,9 +20,8 @@ public class AttractionInformation implements Serializable {
     public AttractionInformation(String title, String typeOfAttraction, int drawable) {
         this.title = title;
         this.typeOfAttraction = typeOfAttraction;
-        this.unlocked = true;
+        this.unlocked = false;
         this.drawable = drawable;
-
     }
 
 

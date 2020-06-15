@@ -66,7 +66,7 @@ public class AntiSpellActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anti_spell);
 
@@ -161,6 +161,8 @@ public class AntiSpellActivity extends AppCompatActivity {
                                         System.out.println("IK GA HET CHECKEN");
                                         textViewFirstWord.setText("HOCUS");
                                         i.setUnlocked(true);
+                                        data.getSessionData().setFirstStart(true);
+                                        data.Save();
                                     }
                                 }
                         }
@@ -170,6 +172,8 @@ public class AntiSpellActivity extends AppCompatActivity {
                                     System.out.println("IK GA HET CHECKEN");
                                     textViewSecondWord.setText("POCUS");
                                     i.setUnlocked(true);
+                                    data.getSessionData().setHasSecondPart(true);
+                                    data.Save();
                                 }
                             }
                         }
@@ -188,6 +192,12 @@ public class AntiSpellActivity extends AppCompatActivity {
 //                }
             }
         });
+
+        if(data.getSessionData().isHasFirstPart()){
+            textViewFirstWord.setText("HOCUS");
+        }else if(data.getSessionData().isHasSecondPart()){
+            textViewSecondWord.setText("POCUS");
+        }
     }
 
     private void subscribeTopic() {
