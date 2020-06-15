@@ -156,7 +156,7 @@ public class AntiSpellActivity extends AppCompatActivity {
 
                         System.out.println(data.getSessionData().getTopicMsg().keySet());
                         if(key.contains("CobraSpel")){
-                                for(AttrationInformation i : data.getSessionData().getAllAttractions() ){
+                                for(AttractionInformation i : data.getSessionData().getAllAttractions() ){
                                     if(i.getTitle().equals("Cobra")){
                                         System.out.println("IK GA HET CHECKEN");
                                         textViewFirstWord.setText("HOCUS");
@@ -165,7 +165,7 @@ public class AntiSpellActivity extends AppCompatActivity {
                                 }
                         }
                         else if(key.contains("MemorySpel")){
-                            for(AttrationInformation i : data.getSessionData().getAllAttractions() ){
+                            for(AttractionInformation i : data.getSessionData().getAllAttractions() ){
                                 if(i.getTitle().equals("Fabel Woud")){
                                     System.out.println("IK GA HET CHECKEN");
                                     textViewSecondWord.setText("POCUS");

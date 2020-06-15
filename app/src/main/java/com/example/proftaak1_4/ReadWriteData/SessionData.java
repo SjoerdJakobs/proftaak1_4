@@ -1,7 +1,6 @@
 package com.example.proftaak1_4.ReadWriteData;
 
-import com.example.proftaak1_4.AttractionInfoActivity;
-import com.example.proftaak1_4.AttrationInformation;
+import com.example.proftaak1_4.AttractionInformation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class SessionData implements Serializable
     private boolean hasThirdPart;
     private boolean hasFourthPart;
 
-    private ArrayList<AttrationInformation> allAttractions;
+    private ArrayList<AttractionInformation> allAttractions;
     private boolean firstStart;
 
     private HashMap<String, String> topicMsg;
@@ -116,11 +115,11 @@ public class SessionData implements Serializable
         this.userName = userName;
     }
 
-    public ArrayList<AttrationInformation> getAllAttractions() {
+    public ArrayList<AttractionInformation> getAllAttractions() {
         return allAttractions;
     }
 
-    public void setAllAttractions(ArrayList<AttrationInformation> allAttractions) {
+    public void setAllAttractions(ArrayList<AttractionInformation> allAttractions) {
         this.allAttractions = allAttractions;
     }
 

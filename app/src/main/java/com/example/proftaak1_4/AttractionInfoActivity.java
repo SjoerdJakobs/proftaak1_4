@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 public class AttractionInfoActivity extends AppCompatActivity {
 
@@ -29,18 +28,20 @@ public class AttractionInfoActivity extends AppCompatActivity {
         ImageView attractionCover = findViewById(R.id.attraction_cover_image);
 
         pageDivider.setImageResource(R.drawable.divider);
-        attractionCover.setImageResource(R.drawable.cobra);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        AttrationInformation information = null;
+        AttractionInformation information = null;
         if (bundle != null) {
-            information = (AttrationInformation) bundle.getSerializable(EXTRA_OBJECT);
+            information = (AttractionInformation) bundle.getSerializable(EXTRA_OBJECT);
+
         }
 
         if (information != null) {
             TextView textView = findViewById(R.id.attraction_description);
             textView.setText(information.getText());
+            attractionCover.setImageResource(information.getDrawable());
+
         }
     }
 

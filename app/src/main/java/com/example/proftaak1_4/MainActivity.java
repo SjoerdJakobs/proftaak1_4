@@ -5,33 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.Dialog;
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 
 import com.example.proftaak1_4.ReadWriteData.SavedData;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.nio.channels.ScatteringByteChannel;
 
 public class MainActivity extends AppCompatActivity {
     Dialog mydialog;
@@ -57,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         ImageButton button1 = findViewById(R.id.imageButton2);
         ImageButton button2 = findViewById(R.id.imageButton5);
 
-        AttrationInformation information1 = data.getSessionData().getAllAttractions().get(1);
-        AttrationInformation information2 = data.getSessionData().getAllAttractions().get(0);
+        AttractionInformation information1 = data.getSessionData().getAllAttractions().get(1);
+        AttractionInformation information2 = data.getSessionData().getAllAttractions().get(0);
 
         if(information1.isUnlocked()) {
             button1.setColorFilter(Color.parseColor("#38FF00")); //GREEN
@@ -123,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         public void toDetailScreen(View v) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = data.getSessionData().getAllAttractions().get(1);
+        AttractionInformation information = data.getSessionData().getAllAttractions().get(1);
 
         if(information.isUnlocked()){
             Bundle bundle = new Bundle();
@@ -146,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     public void toDetailScreen2(View v) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = data.getSessionData().getAllAttractions().get(0);
+        AttractionInformation information = data.getSessionData().getAllAttractions().get(0);
 
         if(information.isUnlocked()){
             Bundle bundle = new Bundle();

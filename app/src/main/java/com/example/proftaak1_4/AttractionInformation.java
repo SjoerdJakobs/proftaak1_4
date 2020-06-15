@@ -1,19 +1,28 @@
 package com.example.proftaak1_4;
 
 
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 
-public class AttrationInformation implements Serializable {
+public class AttractionInformation implements Serializable {
 
 
     private String title;
     private String typeOfAttraction;
     private boolean unlocked;
+    private int drawable;
 
-    public AttrationInformation(String title, String typeOfAttraction) {
+    public int getDrawable() {
+        return drawable;
+    }
+
+    public AttractionInformation(String title, String typeOfAttraction, int drawable) {
         this.title = title;
         this.typeOfAttraction = typeOfAttraction;
-        this.unlocked = false;
+        this.unlocked = true;
+        this.drawable = drawable;
+
     }
 
 

@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.w3c.dom.Text;
-
-import java.net.Inet4Address;
-
 public class DetailAttractionActivity extends AppCompatActivity {
 
     public static final String EXTRA_OBJECT = "all/information";
@@ -29,9 +25,9 @@ public class DetailAttractionActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        AttrationInformation information = null;
+        AttractionInformation information = null;
         if(bundle != null){
-            information = (AttrationInformation) bundle.getSerializable(EXTRA_OBJECT);
+            information = (AttractionInformation) bundle.getSerializable(EXTRA_OBJECT);
         }
 
         if(information != null){
