@@ -4,20 +4,16 @@
 
     <item
         android:id="@+id/map"
-        android:title="map"
-        />
+        android:icon="@drawable/image_map_icon" />
 
-     <item
+    <item
         android:id="@+id/spell"
-         android:icon="@drawable/ic_action_book"
+        android:icon="@drawable/image_book_icon" />
 
-/>
-
-     <item
+    <item
         android:id="@+id/attractions"
-        android:title="attractions"
+        android:icon="@drawable/image_attractions_icon"
         />
-
 
 
 </menu>
