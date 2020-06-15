@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         public void toDetailScreen(View v) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = data.getSessionData().getAllAttractions().get(0);
+        AttrationInformation information = data.getSessionData().getAllAttractions().get(1);
 
         if(information.isUnlocked()){
             Bundle bundle = new Bundle();
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     public void toDetailScreen2(View v) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = data.getSessionData().getAllAttractions().get(1);
+        AttrationInformation information = data.getSessionData().getAllAttractions().get(0);
 
         if(information.isUnlocked()){
             Bundle bundle = new Bundle();
