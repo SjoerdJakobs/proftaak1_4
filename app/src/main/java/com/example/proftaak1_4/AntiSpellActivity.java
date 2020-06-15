@@ -135,31 +135,31 @@ public class AntiSpellActivity extends AppCompatActivity {
         codeInput = findViewById(R.id.inputAntiSpellCode);
         textView = findViewById(R.id.textView3);
 
-        final String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(getApplicationContext(), "tcp://maxwell.bps-software.nl:1883", clientId);
+        //final String clientId = MqttClient.generateClientId();
+        //client = new MqttAndroidClient(getApplicationContext(), "tcp://maxwell.bps-software.nl:1883", clientId);
 
 
-        client.setCallback(new MqttCallback() {
-            @Override
-            public void connectionLost(Throwable cause) {
-                Log.d(LOGTAG, "MQTT client lost connection to broker");
+//        client.setCallback(new MqttCallback() {
+//            @Override
+//            public void connectionLost(Throwable cause) {
+//                Log.d(LOGTAG, "MQTT client lost connection to broker");
+//
+//            }
+//
+//            @Override
+//            public void messageArrived(String topic, MqttMessage message) throws Exception {
+//                Log.d(LOGTAG, "MQTT client received message " + message + " on topic " + topic);
+//                // Check what topic the message is for and handle accordingly
+//                data.getSessionData().getTopicMsg().put(topic, message.toString());
+//            }
+//
+//            @Override
+//            public void deliveryComplete(IMqttDeliveryToken token) {
+//                Log.d(LOGTAG, "MQTT client delivery complete");
+//            }
+//        });
 
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
-                Log.d(LOGTAG, "MQTT client received message " + message + " on topic " + topic);
-                // Check what topic the message is for and handle accordingly
-                data.getSessionData().getTopicMsg().put(topic, message.toString());
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken token) {
-                Log.d(LOGTAG, "MQTT client delivery complete");
-            }
-        });
-
-        connectToBroker(client, clientId);
+        //connectToBroker(client, clientId);
 
 
         invoerButton.setOnClickListener(new View.OnClickListener() {

@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         }else{
             button2.setColorFilter(Color.parseColor("#68E1D7"));
         }
+
+        Intent mqttService = new Intent(this, MQTTService.class);
+        startService(mqttService);
     }
 
 
