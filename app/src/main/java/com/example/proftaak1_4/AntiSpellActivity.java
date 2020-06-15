@@ -13,39 +13,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 
 import com.example.proftaak1_4.ReadWriteData.SavedData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import org.eclipse.paho.client.mqttv3.MqttSecurityException;
-
-import org.eclipse.paho.client.mqttv3.MqttToken;
-import org.eclipse.paho.client.mqttv3.MqttTopic;
-
-import java.sql.SQLOutput;
-import java.util.HashMap;
-
 
 
 public class AntiSpellActivity extends AppCompatActivity {
@@ -61,7 +40,8 @@ public class AntiSpellActivity extends AppCompatActivity {
     private Button invoerButton;
     private TextInputEditText codeInput;
 
-    private TextView textView;
+    private TextView textViewFirstWord;
+    private TextView textViewSecondWord;
 
     private static final String LOGTAG = MainActivity.class.getName();
 
@@ -78,9 +58,9 @@ public class AntiSpellActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        disconnectFromBroker(client);
-        client.unregisterResources();
-        client.close();
+
+//        client.unregisterResources();
+//        client.close();
         super.onDestroy();
     }
 
@@ -133,33 +113,34 @@ public class AntiSpellActivity extends AppCompatActivity {
 
         invoerButton = findViewById(R.id.invoerenButtonAntispreuk);
         codeInput = findViewById(R.id.inputAntiSpellCode);
-        textView = findViewById(R.id.textView3);
+        textViewFirstWord = findViewById(R.id.textView3);
+        textViewSecondWord = findViewById(R.id.textView4);
 
-        final String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(getApplicationContext(), "tcp://maxwell.bps-software.nl:1883", clientId);
+        //final String clientId = MqttClient.generateClientId();
+        //client = new MqttAndroidClient(getApplicationContext(), "tcp://maxwell.bps-software.nl:1883", clientId);
 
 
-        client.setCallback(new MqttCallback() {
-            @Override
-            public void connectionLost(Throwable cause) {
-                Log.d(LOGTAG, "MQTT client lost connection to broker");
+//        client.setCallback(new MqttCallback() {
+//            @Override
+//            public void connectionLost(Throwable cause) {
+//                Log.d(LOGTAG, "MQTT client lost connection to broker");
+//
+//            }
+//
+//            @Override
+//            public void messageArrived(String topic, MqttMessage message) throws Exception {
+//                Log.d(LOGTAG, "MQTT client received message " + message + " on topic " + topic);
+//                // Check what topic the message is for and handle accordingly
+//                data.getSessionData().getTopicMsg().put(topic, message.toString());
+//            }
+//
+//            @Override
+//            public void deliveryComplete(IMqttDeliveryToken token) {
+//                Log.d(LOGTAG, "MQTT client delivery complete");
+//            }
+//        });
 
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
-                Log.d(LOGTAG, "MQTT client received message " + message + " on topic " + topic);
-                // Check what topic the message is for and handle accordingly
-                data.getSessionData().getTopicMsg().put(topic, message.toString());
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken token) {
-                Log.d(LOGTAG, "MQTT client delivery complete");
-            }
-        });
-
-        connectToBroker(client, clientId);
+        //connectToBroker(client, clientId);
 
 
         invoerButton.setOnClickListener(new View.OnClickListener() {
@@ -170,24 +151,34 @@ public class AntiSpellActivity extends AppCompatActivity {
 
                 for(String key : data.getSessionData().getTopicMsg().keySet()){
                     if(data.getSessionData().getTopicMsg().get(key).equals(codeInput.getText().toString())){
-                        textView.setText("HOCUS");
+
                         System.out.println(data.getSessionData().getTopicMsg().keySet());
                         if(key.contains("CobraSpel")){
                                 for(AttrationInformation i : data.getSessionData().getAllAttractions() ){
                                     if(i.getTitle().equals("Cobra")){
                                         System.out.println("IK GA HET CHECKEN");
+                                        textViewFirstWord.setText("HOCUS");
                                         i.setUnlocked(true);
                                     }
                                 }
                         }
-                        /**
-                         * TODO: do the check for the memory game!
-                         */
+                        else if(key.contains("MemorySpel")){
+                            for(AttrationInformation i : data.getSessionData().getAllAttractions() ){
+                                if(i.getTitle().equals("Fabel Woud")){
+                                    System.out.println("IK GA HET CHECKEN");
+                                    textViewSecondWord.setText("POCUS");
+                                    i.setUnlocked(true);
+                                }
+                            }
+                        }
+
+                        codeInput.setText("");
                         return;
                     }
                 }
 
-                textView.setText("FAILED");
+                textViewFirstWord.setText("FAILED");
+                codeInput.setText("");
 //                if (topicMsg.containsValue(codeInput.getText().toString())) {
 //                    textView.setText("HOCUS");
 //                } else {
@@ -255,26 +246,26 @@ public class AntiSpellActivity extends AppCompatActivity {
         }
     }
 
-    private void disconnectFromBroker(MqttAndroidClient client) {
-        try {
-            // Try to disconnect from the MQTT broker
-            IMqttToken token = client.disconnect();
-            // Set up callbacks to handle the result
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.d(LOGTAG, "MQTT client is now disconnected from MQTT broker");
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.e(LOGTAG, "MQTT failed to disconnect from MQTT broker: " + exception.getLocalizedMessage());
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void disconnectFromBroker(MqttAndroidClient client) {
+//        try {
+//            // Try to disconnect from the MQTT broker
+//            IMqttToken token = client.disconnect();
+//            // Set up callbacks to handle the result
+//            token.setActionCallback(new IMqttActionListener() {
+//                @Override
+//                public void onSuccess(IMqttToken asyncActionToken) {
+//                    Log.d(LOGTAG, "MQTT client is now disconnected from MQTT broker");
+//                }
+//
+//                @Override
+//                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+//                    Log.e(LOGTAG, "MQTT failed to disconnect from MQTT broker: " + exception.getLocalizedMessage());
+//                }
+//            });
+//        } catch (MqttException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 

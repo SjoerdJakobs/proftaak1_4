@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         }else{
             button2.setColorFilter(Color.parseColor("#68E1D7"));
         }
+
+        Intent mqttService = new Intent(this, MQTTService.class);
+        startService(mqttService);
     }
 
 
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         public void toDetailScreen(View v) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = data.getSessionData().getAllAttractions().get(0);
+        AttrationInformation information = data.getSessionData().getAllAttractions().get(1);
 
         if(information.isUnlocked()){
             Bundle bundle = new Bundle();
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     public void toDetailScreen2(View v) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = data.getSessionData().getAllAttractions().get(1);
+        AttrationInformation information = data.getSessionData().getAllAttractions().get(0);
 
         if(information.isUnlocked()){
             Bundle bundle = new Bundle();
