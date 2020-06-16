@@ -190,9 +190,10 @@ public class AntiSpellActivity extends AppCompatActivity {
                                 int duration = Toast.LENGTH_LONG;
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
-//                                data.getSessionData().getAllAttractions().add(data.getSessionData().getSecretEnd());
+                                data.getSessionData().getSecretEnd().setUnlocked(true);
 
                                 data.getSessionData().setHasCompleted(true);
+                                data.Save();
                             }
                         }
 
