@@ -188,10 +188,10 @@ public class AntiSpellActivity extends AppCompatActivity {
                                 Context context = getApplicationContext();
                                 CharSequence text = "Het is je gelukt om de anti spreuk te voltooien en de boze tovenaar weg te drijven uit het park! (Kijk snel bij de attractie lijst)";
                                 int duration = Toast.LENGTH_LONG;
-
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
-                                data.getSessionData().getAllAttractions().add(data.getSessionData().getSecretEnd());
+//                                data.getSessionData().getAllAttractions().add(data.getSessionData().getSecretEnd());
+
                                 data.getSessionData().setHasCompleted(true);
                             }
                         }
@@ -213,13 +213,17 @@ public class AntiSpellActivity extends AppCompatActivity {
 //                    textView.setText("FAILED");
 //                }
             }
+
         });
 
         if(data.getSessionData().isHasFirstPart()){
             textViewFirstWord.setText("HOCUS");
-        }else if(data.getSessionData().isHasSecondPart()){
+        }
+
+        if(data.getSessionData().isHasSecondPart()){
             textViewSecondWord.setText("POCUS");
         }
+
     }
 
     private void subscribeTopic() {

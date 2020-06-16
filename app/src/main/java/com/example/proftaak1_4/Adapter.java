@@ -61,15 +61,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
         AttractionInformation information = this.allAtractions.get(position);
 
         holder.textView.setText(information.getCaption());
+        holder.imageView.setImageResource(information.getDrawable());
 
-        switch (information.getTypeOfAttraction()){
-            case "cobra":
-                holder.imageView.setImageResource(R.drawable.cobra);
-                break;
-            case "fabelwoud":
-                holder.imageView.setImageResource(R.drawable.the_tree);
-                break;
-        }
+//        switch (information.getTypeOfAttraction()){
+//            case "cobra":
+//                holder.imageView.setImageResource(R.drawable.cobra);
+//                break;
+//            case "fabelwoud":
+//                holder.imageView.setImageResource(R.drawable.the_tree);
+//                break;
+//        }
 
     }
 
