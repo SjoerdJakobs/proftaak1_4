@@ -23,6 +23,7 @@ public class StartActivity extends AppCompatActivity {
         if(data.getSessionData().isFirstStart()){
             data.getSessionData().getAllAttractions().add(new AttractionInformation("Cobra", "cobra", R.drawable.cobra));
             data.getSessionData().getAllAttractions().add(new AttractionInformation("Fabel Woud", "fabelwoud", R.drawable.the_tree));
+            data.getSessionData().setSecretEnd(new AttractionInformation("De boze tovenaar: Schmargamel", "end", R.drawable.tovenaar));
             data.getSessionData().setFirstStart(false);
         }
 

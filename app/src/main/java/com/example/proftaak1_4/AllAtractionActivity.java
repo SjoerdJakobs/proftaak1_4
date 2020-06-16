@@ -44,6 +44,13 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
             System.out.println("HELLO LOADING ");
         }
 
+        if(data.getSessionData().isHasCompleted() && data.getSessionData().isHasFirstPart() && data.getSessionData().isHasSecondPart()){
+            System.out.println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERE");
+            if(!data.getSessionData().getAllAttractions().contains(data.getSessionData().getSecretEnd())){
+                data.getSessionData().getAllAttractions().add(data.getSessionData().getSecretEnd());
+                adapter.notifyDataSetChanged();
+            }
+        }
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
