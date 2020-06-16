@@ -10,6 +10,9 @@ public class SessionData implements Serializable
 {
     private boolean hasFirstPart;
     private boolean hasSecondPart;
+    private boolean hasCompleted;
+
+    private AttractionInformation secretEnd;
 
     private ArrayList<AttractionInformation> allAttractions;
     private boolean firstStart;
@@ -21,10 +24,12 @@ public class SessionData implements Serializable
     {
         this.hasFirstPart = false;
         this.hasSecondPart = false;
+        this.hasCompleted = false;
 
         this.allAttractions = new ArrayList<>();
         this.firstStart = true;
         this.topicMsg = new HashMap<>();
+        this.secretEnd = null;
     }
 
     public boolean isHasFirstPart() {
@@ -65,5 +70,22 @@ public class SessionData implements Serializable
 
     public void setTopicMsg(HashMap<String, String> topicMsg) {
         this.topicMsg = topicMsg;
+    }
+
+
+    public boolean isHasCompleted() {
+        return hasCompleted;
+    }
+
+    public void setHasCompleted(boolean hasCompleted) {
+        this.hasCompleted = hasCompleted;
+    }
+
+    public AttractionInformation getSecretEnd() {
+        return secretEnd;
+    }
+
+    public void setSecretEnd(AttractionInformation secretEnd) {
+        this.secretEnd = secretEnd;
     }
 }

@@ -181,6 +181,21 @@ public class AntiSpellActivity extends AppCompatActivity {
                         }
 
                         codeInput.setText("");
+
+
+                        if(data.getSessionData().isHasFirstPart() &&  data.getSessionData().isHasSecondPart()){
+                            if(!data.getSessionData().isHasCompleted()){
+                                Context context = getApplicationContext();
+                                CharSequence text = "Het is je gelukt om de anti spreuk te voltooien en de boze tovenaar weg te drijven uit het park! (Kijk snel bij de attractie lijst)";
+                                int duration = Toast.LENGTH_LONG;
+
+                                Toast toast = Toast.makeText(context, text, duration);
+                                toast.show();
+                                data.getSessionData().getAllAttractions().add(data.getSessionData().getSecretEnd());
+                                data.getSessionData().setHasCompleted(true);
+                            }
+                        }
+
                         return;
                     }
                 }

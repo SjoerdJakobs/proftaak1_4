@@ -41,6 +41,9 @@ public class AttractionInformation implements Serializable {
             case "fabelwoud":
                 text = "Here is the fabel woud ladies and gentlemen";
                 break;
+            case "end":
+                text = "De boze tovenaar Schmargamel was ooit eens een goede tovenaar, tot dat hij zijn plezier verloor en wenste dat niemand meer plezier mocht hebben. Daarom heeft de boze tovenaar het pretpark beinvloed, maar dankzij jou is Schargamel tegengehouden en verdreven van het park.";
+                break;
         }
 
         return text;
