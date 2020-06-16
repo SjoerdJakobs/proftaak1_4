@@ -21,8 +21,8 @@ public class StartActivity extends AppCompatActivity {
         saveAndLoad();
 
         if(data.getSessionData().isFirstStart()){
-            data.getSessionData().getAllAttractions().add(new AttrationInformation("Cobra", "cobra"));
-            data.getSessionData().getAllAttractions().add(new AttrationInformation("Fabel Woud", "fabelwoud"));
+            data.getSessionData().getAllAttractions().add(new AttractionInformation("Cobra", "cobra", R.drawable.cobra));
+            data.getSessionData().getAllAttractions().add(new AttractionInformation("Fabel Woud", "fabelwoud", R.drawable.the_tree));
             data.getSessionData().setFirstStart(false);
         }
 

@@ -1,8 +1,6 @@
 package com.example.proftaak1_4;
 
 import android.content.Context;
-import android.media.Image;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
 
 
     private Context context;
-    private List<AttrationInformation> allAtractions;
+    private List<AttractionInformation> allAtractions;
     private onItemClickListener clickListener;
 
 
@@ -44,7 +41,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
         }
     }
 
-    public Adapter(Context context, List<AttrationInformation> allAtractions, onItemClickListener clickListener) {
+    public Adapter(Context context, List<AttractionInformation> allAtractions, onItemClickListener clickListener) {
         this.context = context;
         this.allAtractions = allAtractions;
         this.clickListener = clickListener;
@@ -61,7 +58,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        AttrationInformation information = this.allAtractions.get(position);
+        AttractionInformation information = this.allAtractions.get(position);
 
         holder.textView.setText(information.getCaption());
 

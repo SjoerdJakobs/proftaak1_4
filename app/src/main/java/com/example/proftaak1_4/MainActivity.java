@@ -5,33 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.Dialog;
-import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.example.proftaak1_4.ReadWriteData.SavedData;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.nio.channels.ScatteringByteChannel;
 
 public class MainActivity extends AppCompatActivity {
     Dialog mydialog;
+
+    SavedData data = SavedData.INSTANCE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,21 +38,31 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setFocusable(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-
         MenuItem item = bottomNavigationView.getMenu().findItem(R.id.map);
         item.setChecked(true);
+
+        ImageButton button1 = findViewById(R.id.imageButton2);
+        ImageButton button2 = findViewById(R.id.imageButton5);
+
+        AttractionInformation information1 = data.getSessionData().getAllAttractions().get(1);
+        AttractionInformation information2 = data.getSessionData().getAllAttractions().get(0);
+
+        if(information1.isUnlocked()) {
+            button1.setColorFilter(Color.parseColor("#38FF00")); //GREEN
+        } else{
+            button1.setColorFilter(Color.parseColor("#68E1D7")); //BLUE
+        }
+
+        if(information2.isUnlocked()) {
+            button2.setColorFilter(Color.parseColor("#38FF00"));
+        }else{
+            button2.setColorFilter(Color.parseColor("#68E1D7"));
+        }
+
+        Intent mqttService = new Intent(this, MQTTService.class);
+        startService(mqttService);
     }
 
-    public void setLayoutForIcon(BottomNavigationMenuView menuView, int i, int id){
-        final View iconView = menuView.getChildAt(i).findViewById(id);
-        final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
-        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        // set your height here
-        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, displayMetrics);
-        // set your width here
-        layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, displayMetrics);
-        iconView.setLayoutParams(layoutParams);
-    }
 
     public void ShowPopUp(View v) {
         mydialog.setContentView(R.layout.popup);
@@ -104,4 +107,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+        public void toDetailScreen(View v) {
+
+        Intent intent = new Intent(this, AttractionInfoActivity.class);
+        AttractionInformation information = data.getSessionData().getAllAttractions().get(1);
+
+        if(information.isUnlocked()){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(DetailAttractionActivity.EXTRA_OBJECT, information);
+
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence text = "Je hebt deze attractie nog niet vrijgespeeld/bevrijd!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+    }
+
+    public void toDetailScreen2(View v) {
+
+        Intent intent = new Intent(this, AttractionInfoActivity.class);
+        AttractionInformation information = data.getSessionData().getAllAttractions().get(0);
+
+        if(information.isUnlocked()){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(DetailAttractionActivity.EXTRA_OBJECT, information);
+
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence text = "Je hebt deze attractie nog niet vrijgespeeld/bevrijd!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+    }
 }
