@@ -14,14 +14,13 @@ import android.widget.Toast;
 import com.example.proftaak1_4.ReadWriteData.SavedData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class AllAtractionActivity extends AppCompatActivity implements onItemClickListener {
 
     private RecyclerView recyclerView;
     private Adapter adapter;
-    private ArrayList<AttrationInformation> allAttractions;
+    private ArrayList<AttractionInformation> allAttractions;
 
     SavedData data = SavedData.INSTANCE;
 
@@ -38,8 +37,8 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         if(data.getSessionData().isFirstStart()){
-            data.getSessionData().getAllAttractions().add(new AttrationInformation("Cobra", "cobra"));
-            data.getSessionData().getAllAttractions().add(new AttrationInformation("Fabel Woud", "fabelwoud"));
+            data.getSessionData().getAllAttractions().add(new AttractionInformation("Cobra", "cobra", R.drawable.cobra));
+            data.getSessionData().getAllAttractions().add(new AttractionInformation("Fabel Woud", "fabelwoud", R.drawable.the_tree));
             adapter.notifyDataSetChanged();
             data.getSessionData().setFirstStart(false);
             System.out.println("HELLO LOADING ");
@@ -89,7 +88,7 @@ public class AllAtractionActivity extends AppCompatActivity implements onItemCli
     public void onItemClick(int position) {
 
         Intent intent = new Intent(this, AttractionInfoActivity.class);
-        AttrationInformation information = data.getSessionData().getAllAttractions().get(position);
+        AttractionInformation information = data.getSessionData().getAllAttractions().get(position);
 
         if(information.isUnlocked()){
             Bundle bundle = new Bundle();

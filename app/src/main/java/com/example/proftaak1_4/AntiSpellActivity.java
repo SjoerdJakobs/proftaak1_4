@@ -3,6 +3,7 @@ package com.example.proftaak1_4;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.proftaak1_4.ReadWriteData.SavedData;
@@ -66,7 +68,7 @@ public class AntiSpellActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anti_spell);
 
@@ -83,7 +85,7 @@ public class AntiSpellActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    System.out.println("yeet");
+
                     return true;
                 }
                 return false;
@@ -156,20 +158,24 @@ public class AntiSpellActivity extends AppCompatActivity {
 
                         System.out.println(data.getSessionData().getTopicMsg().keySet());
                         if(key.contains("CobraSpel")){
-                                for(AttrationInformation i : data.getSessionData().getAllAttractions() ){
+                                for(AttractionInformation i : data.getSessionData().getAllAttractions() ){
                                     if(i.getTitle().equals("Cobra")){
                                         System.out.println("IK GA HET CHECKEN");
                                         textViewFirstWord.setText("HOCUS");
                                         i.setUnlocked(true);
+                                        data.getSessionData().setFirstStart(true);
+                                        data.Save();
                                     }
                                 }
                         }
                         else if(key.contains("MemorySpel")){
-                            for(AttrationInformation i : data.getSessionData().getAllAttractions() ){
+                            for(AttractionInformation i : data.getSessionData().getAllAttractions() ){
                                 if(i.getTitle().equals("Fabel Woud")){
                                     System.out.println("IK GA HET CHECKEN");
                                     textViewSecondWord.setText("POCUS");
                                     i.setUnlocked(true);
+                                    data.getSessionData().setHasSecondPart(true);
+                                    data.Save();
                                 }
                             }
                         }
@@ -179,8 +185,13 @@ public class AntiSpellActivity extends AppCompatActivity {
                     }
                 }
 
-                textViewFirstWord.setText("FAILED");
                 codeInput.setText("");
+                Context context = getApplicationContext();
+                CharSequence text = "Oops, er is iets mis gegaan...";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 //                if (topicMsg.containsValue(codeInput.getText().toString())) {
 //                    textView.setText("HOCUS");
 //                } else {
@@ -188,6 +199,12 @@ public class AntiSpellActivity extends AppCompatActivity {
 //                }
             }
         });
+
+        if(data.getSessionData().isHasFirstPart()){
+            textViewFirstWord.setText("HOCUS");
+        }else if(data.getSessionData().isHasSecondPart()){
+            textViewSecondWord.setText("POCUS");
+        }
     }
 
     private void subscribeTopic() {
